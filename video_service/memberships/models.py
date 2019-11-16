@@ -6,16 +6,16 @@ from django.db.models.signals import post_save
 import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
-MEMBBERSHIP_CHOICES = (
+MEMBERSHIP_CHOICES = (
     ('Enterprise', 'ent'),
     ('Professional', 'pro'),
     ('Free', 'free')
 )
 # Create your models here.
 class Membership(models.Model):
-    slug = models.SlugField(),
-    membership_type = models.CharField(choices=MEMBBERSHIP_CHOICES, default='Free', max_length=30)
-    price = models.IntegerField(max_length=15, blank=True),
+    slug = models.SlugField()
+    membership_type = models.CharField(choices=MEMBERSHIP_CHOICES, default='Free', max_length=30)
+    price = models.IntegerField(blank=True)
     stripe_plan_id = models.CharField(max_length=40)
 
     def __str__(self):
