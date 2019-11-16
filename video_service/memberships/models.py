@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+from django.db.models.signals import post_save
 
 MEMBBERSHIP_CHOICES = (
     ('Enterprise', 'ent'),
@@ -14,3 +16,22 @@ class Membership(models.Model):
 
     def __str__(self):
         return self.membership_type
+
+
+class UserMembership(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    stripe_customer_id = models.CharField(max_length=40)
+    membership = models.ForeignKey(Membership, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.user.username
+
+class Subscription(models.Model):
+     user_membership = models.ForeignKey(UserMembership, on_delete=models.CASCADE)
+     stripe_subscription_id = models.CharField(max_length=40)
+     active = models.BooleanField(default=True)
+
+     def __str__(self):
+         return self.user_membership.user.username
+
+
