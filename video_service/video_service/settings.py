@@ -135,3 +135,12 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(VENV_PATH, 'media_root')
 
+
+if DEBUG:
+    STRIPE_PULISHABLE_KEY = 'pk_test_zWS4ZQM1tsyydOBt7VckADpv00LVdSNpc6'
+    STRIPE_SECRET_KEY = 'sk_test_15axxULjXG4Utm2UZAr26rzV00LQvMkhuJ'
+
+else:
+    # Live keys 
+    STRIPE_PULISHABLE_KEY = 'pk_test_zWS4ZQM1tsyydOBt7VckADpv00LVdSNpc6'
+    STRIPE_SECRET_KEY = 'sk_test_15axxULjXG4Utm2UZAr26rzV00LQvMkhuJ'
