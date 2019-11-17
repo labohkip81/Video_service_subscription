@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html>
+{% extends 'courses/base.html' %}
 
-<head>
-<title></title>
-</head>
-<body>
-{{ object }}
-</body>
-</html>
+
+
+{% block content %}
+
+
+<h1> Lesson Detail view </h1>
+{% if object is not None %}
+{{ object.title }}
+{{ object.description}}
+{% else %}
+<h3> Upgrade membership </h3>
+{% endif %}
+
+{% endblock content %}
